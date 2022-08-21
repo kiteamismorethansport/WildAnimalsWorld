@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 
 public class Statistics {
-
+    // This method realizes statistics about quantity of all animal types and genders
     public static void statistics(ArrayList<Animal> animals, ArrayList <Plants> plants) {
         int wolfmale = 0;
         int wolffemale = 0;
@@ -160,7 +160,7 @@ public class Statistics {
         System.out.print("Total number of rabbit males: " + rabbitfemale+ " ");
         System.out.print("Total number of sheep females: " + sheepmale+ " ");
         System.out.print("Total number of sheep males: " + sheepfemale+ " ");
-        System.out.print("Total number of plants: " + quantityOfPlants+ " ");
+        System.out.print("Total number of plants: " + quantityOfPlants + " ");
         System.out.println();
 
     }

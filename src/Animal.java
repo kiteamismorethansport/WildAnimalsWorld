@@ -16,7 +16,7 @@ public class Animal {
     public int canEat;
     public static boolean eatable = true;
     public static int bornWeight;
-    public static int[][] animalsWorld = new int[20][100];
+
 
     public Animal(String unicodeOfAnimal, String nameOfAnimal, String sex, int bornWeight, int weight, int speed, int x, int y, boolean isVeg, int eatIndex, int beEatenIndex, int canEat, boolean eatable) {
         this.unicodeOfAnimal = unicodeOfAnimal;
@@ -34,7 +34,7 @@ public class Animal {
         this.bornWeight = bornWeight;
 
     }
-
+// This method randomly chooses the gender of the animal
     public static String sex(){
         int i = (int)(Math.random()*10);
         String s = null;
@@ -53,33 +53,34 @@ public class Animal {
            double i = Math.random() * 10;
            if (i >= 0 && i <= 2.5) {
                animals.get(k).x += animals.get(k).speed;
-               if (animals.get(k).x > animalsWorld[0].length) {
-                   animals.get(k).x = animalsWorld[0].length;
+               if (animals.get(k).x > 100) {
+                   animals.get(k).x = 100;
                }
-               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat;
+               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat/2;
            }
            if (i > 2.5 && i <= 5) {
                animals.get(k).x -= animals.get(k).speed;
                if (animals.get(k).x < 0) {
                    animals.get(k).x = 0;
                }
-               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat;
+               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat/2;
            }
            if (i > 5 && i <= 7.5) {
                animals.get(k).y +=animals.get(k).speed;
-               if (animals.get(k).y > animalsWorld.length) {
-                   animals.get(k).y = animalsWorld.length;
+               if (animals.get(k).y > 20) {
+                   animals.get(k).y = 20;
                }
-               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat;
+               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat/2;
            }
            if (i > 7.5 && i <= 10) {
                animals.get(k).y -= animals.get(k).speed;
                if (animals.get(k).y < 0) {
                    animals.get(k).y = 0;
                }
-               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat;
+               animals.get(k).weight = animals.get(k).weight - animals.get(k).canEat/2;
            }
        }
+
     }
 
 
@@ -90,12 +91,13 @@ public class Animal {
                 if (animals.get(i).getClass().equals(animals.get(k).getClass()) && animals.get(i).x == animals.get(k).x && animals.get(i).y == animals.get(k).y && !animals.get(i).sex.equals(animals.get(k).sex) && animals.get(i).eatIndex == animals.get(k).eatIndex && animals.get(i).beEatenIndex == animals.get(k).beEatenIndex) {
 
                     animals.add(new Animal(animals.get(i).unicodeOfAnimal, animals.get(i).nameOfAnimal, Animal.sex(), animals.get(i).bornWeight, animals.get(i).bornWeight, animals.get(i).speed, (int) (Math.random() * 100), (int) (Math.random() * 20), animals.get(i).isVeg, animals.get(i).eatIndex, animals.get(i).beEatenIndex, animals.get(i).canEat, Animal.eatable));
+
                 }
             }
         }
         return animals;
     }
-// This method realizes process of taking food by animals predators, and herbivorous
+// This method realizes process of eating food by  animals predators, and herbivorous
     public static void eat(ArrayList<Animal> animals, ArrayList<Plants> plants) {
         for (int i = 0; i < animals.size(); i++) {
             for (int k = i + 1; k < animals.size(); k++) {
@@ -140,6 +142,7 @@ public class Animal {
             }
         }
     }
+    // This method fills the eatorbeeatenprobability table of each animal type
     public static int eatOrBeEatenProbability(Animal one, Animal two){
         for( int i = 0; i<14;i++) {
             for (int k = 0; k < 15; k++) {
@@ -197,14 +200,15 @@ public class Animal {
         }
         else return 0;
     }
-    public static ArrayList <Animal> die (ArrayList<Animal> animals) {
+
+    // This method realizes the death of any animal by removing it from the ArrayList of all animals
+    public static void die (ArrayList<Animal> animals) {
         for (int i = 0; i<animals.size(); i++){
             if (animals.get(i).weight <= 0) {
 
                 animals.remove(i);
             }
         }
-        return animals;
         }
     }
 
